@@ -5,33 +5,18 @@ using UnityEngine;
 public class player : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject playerBox, bar;
-    public float velocity;
-    Rigidbody2D rb;
+    Rigidbody2D rb2d;
+    float moveInput;
+    float speed = 10f;
     void Start()
     {
-        rb = playerBox.GetComponent<Rigidbody2D>();   
+        rb2d = GetComponent<Rigidbody2D>();       
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddForce(Vector2.left * 5, ForceMode2D.Force);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddForce(Vector2.right * 5, ForceMode2D.Force);
-        }
-
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.name=="bar")
-        {
-            rb.AddForce(Vector2.up*velocity,ForceMode2D.Impulse);
-        }
-
+        moveInput = Input.GetAxis("Horizontal");
+        rb2d.velocity = new Vector2(moveInput * speed, rb2d.velocity.y);
     }
 }
