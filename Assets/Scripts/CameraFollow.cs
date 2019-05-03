@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform target;
-    public GameObject levelGenerator;
 
    // public float smoothSpeed = .3f;
     //private Vector3 currentVelocity;
@@ -24,7 +23,6 @@ public class CameraFollow : MonoBehaviour
             //this for late update
             // transform.position = Vector3.SmoothDamp(transform.position,newPos,ref currentVelocity,smoothSpeed*Time.deltaTime);
             transform.position = newPos;
-           // levelGenerator.GetComponent<LevelGenerator>().CreateNextPlatforms();
         }
     }
 }

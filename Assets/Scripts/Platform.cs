@@ -15,7 +15,7 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+   
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -28,7 +28,7 @@ public class Platform : MonoBehaviour
                 Vector2 vel = collider.velocity;
                 vel.y = speed;
                 collider.velocity = vel;
-
+                float yPos = transform.position.y;
             }
         }
     }
