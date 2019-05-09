@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D))]
 public class player : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class player : MonoBehaviour
     float prevPlatformPos = 0f;
 
     public GameObject levelGenerator;
+    public Button replayBtn;
     void Start()
     {
         facingRight = true;
@@ -25,13 +27,7 @@ public class player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         movement = horizontalInput * movementSpeed;
         FlipSprite(horizontalInput);
-        //torunn
-        if(rb2d.velocity.y == 0)
-        {
-            print("ASDF");
-        }
-
-        //take highest height from two jumps compare them and then if differ then call levelgenerator
+ 
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -56,11 +52,26 @@ public class player : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         float currentPlatformPos = collision.transform.position.y;
         if (currentPlatformPos > prevPlatformPos)
         {
             levelGenerator.GetComponent<LevelGenerator>().CreateNextPlatforms(currentPlatformPos);
             prevPlatformPos =currentPlatformPos;
+            levelGenerator.GetComponent<GameController>().UpdateScore((int)currentPlatformPos);
+
         }
+        
+        if (collision.gameObject.name =="Deathplat")
+        {
+            playerDie();
+        }
+    }
+
+    void playerDie()
+    {
+        //do something to show death of player
+        replayBtn.gameObject.SetActive(true);
+        print("DIEE");
     }
 }
