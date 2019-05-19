@@ -28,4 +28,9 @@ public class GameController : MonoBehaviour
     {
         scoreboard.text = score.ToString();
     }
+    
+    public void PlayBtn()
+    {
+        SceneManager.LoadScene("Main");
+    }
 }
